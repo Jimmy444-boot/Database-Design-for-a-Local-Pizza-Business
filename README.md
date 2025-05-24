@@ -1,67 +1,39 @@
-# Database-Design-for-a-Local-Pizza-Business
-# 🍕 Helena Pizzeria Database
+# 🍕 Helena Pizzeria Database Schema
 
-This project contains the relational database schema and documentation for Helena Pizzeria's business operations. The database is designed to manage orders, menu items, customers, inventory, staff scheduling, and deliveries with scalability and clarity.
+This repository contains the SQL schema for Helena Pizzeria, a restaurant database designed to manage orders, inventory, customers, staff scheduling, and menu items.
 
-## 📂 Project Contents
+## 📌 Overview
 
-- `schema.sql` - SQL statements for creating the database tables with correct primary and foreign keys.
-- `STAKEHOLDER_REQUIREMENTS.md` - Business requirements, stakeholder needs, and design rationale.
-- `README.md` - Project overview and setup guide.
-- `ERD.png` (optional) - Entity-Relationship Diagram for visual reference.
+This schema supports:
+- Customer order management
+- Menu item and recipe tracking
+- Inventory of ingredients
+- Staff rota scheduling
+- Delivery address handling
 
-## 🧑‍💼 Purpose
+The database ensures data integrity through well-defined primary and foreign key constraints.
 
-The goal of this database is to support Helena Pizzeria in managing its end-to-end operations:
-- Handling customer orders (delivery or dine-in)
-- Tracking ingredients and recipes
-- Managing inventory
-- Scheduling staff
-- Storing customer and delivery data
+---
 
-## 🛠️ Technologies Used
+## 🚀 How to Use
 
-- SQL (PostgreSQL / MySQL compatible)
-- Markdown for documentation
-- Optional: dbdiagram.io or Draw.io for ERD
+To use this database schema:
 
-## 🧱 Features
+1. **Install MySQL**  
+   Ensure MySQL Server is installed and running on your system.
 
-- Comprehensive ERD covering orders, customers, recipes, ingredients, and staff
-- Foreign key constraints for referential integrity
-- Ready-to-use SQL DDL for creating all tables
-
-## 📦 Tables Included
-
-- `orders`
-- `customers`
-- `address`
-- `item`
-- `recipe`
-- `inventory`
-- `ingredient`
-- `rota`
-- `staff`
-
-## 🛠️ Getting Started
-
-### Prerequisites
-
-- MySQL Server (5.7+ or 8.0+)
-- MySQL Workbench or any compatible SQL client
-
-### Setup Instructions
-
-1. Clone this repository to your local machine.
-2. Open your MySQL interface.
-3. Create a new database:
+2. **Create a New Database**
    ```sql
    CREATE DATABASE helena_pizzeria;
    USE helena_pizzeria;
-4. Execute the SQL script below to create and link all tables with proper constraints.
-   Copy and paste the SQL code below into your MySQL environment:
+   ```
 
-   CREATE TABLE `orders` (
+3. **Execute the SQL Script**  
+   Copy and run the following SQL code to create all tables and relationships:
+
+
+```sql
+CREATE TABLE `orders` (
     `order_id` varchar(10)  NOT NULL ,
     `created_at` datetime  NOT NULL ,
     `item_id` varchar(10)  NOT NULL ,
@@ -69,18 +41,14 @@ The goal of this database is to support Helena Pizzeria in managing its end-to-e
     `cst_id` int  NOT NULL ,
     `delivery` boolean  NOT NULL ,
     `address_id` int  NOT NULL ,
-    PRIMARY KEY (
-        `order_id`
-    )
+    PRIMARY KEY (`order_id`)
 );
 
 CREATE TABLE `customers` (
     `cst_id` int  NOT NULL ,
     `cst_firstname` vachar(100)  NOT NULL ,
     `cst_lastname` vachar(100)  NOT NULL ,
-    PRIMARY KEY (
-        `cst_id`
-    )
+    PRIMARY KEY (`cst_id`)
 );
 
 CREATE TABLE `address` (
@@ -89,9 +57,7 @@ CREATE TABLE `address` (
     `delivery_address2` Varchar(200)  NULL ,
     `delivery_city` varchar(50)  NOT NULL ,
     `delivery_zipcode` varchar(20)  NOT NULL ,
-    PRIMARY KEY (
-        `address_id`
-    )
+    PRIMARY KEY (`address_id`)
 );
 
 CREATE TABLE `item` (
@@ -101,27 +67,21 @@ CREATE TABLE `item` (
     `item_category` varchar(100)  NOT NULL ,
     `item_size` varchar(10)  NOT NULL ,
     `item_prize` decimal(10,2)  NOT NULL ,
-    PRIMARY KEY (
-        `item_id`
-    )
+    PRIMARY KEY (`item_id`)
 );
 
 CREATE TABLE `recipe` (
     `recipe_id` varchar(20)  NOT NULL ,
     `ing_id` varchar(10)  NOT NULL ,
     `quantity` int  NOT NULL ,
-    PRIMARY KEY (
-        `recipe_id`
-    )
+    PRIMARY KEY (`recipe_id`)
 );
 
 CREATE TABLE `inventory` (
     `inv_id` int  NOT NULL ,
     `item_id` varchar(10)  NOT NULL ,
     `quantity` int  NOT NULL ,
-    PRIMARY KEY (
-        `inv_id`
-    )
+    PRIMARY KEY (`inv_id`)
 );
 
 CREATE TABLE `ingredient` (
@@ -130,9 +90,7 @@ CREATE TABLE `ingredient` (
     `ing_weight` int  NOT NULL ,
     `ing_meas` varchar(20)  NOT NULL ,
     `ing_price` decimal(5,2)  NOT NULL ,
-    PRIMARY KEY (
-        `ing_id`
-    )
+    PRIMARY KEY (`ing_id`)
 );
 
 CREATE TABLE `rota` (
@@ -140,9 +98,7 @@ CREATE TABLE `rota` (
     `date` datetime  NOT NULL ,
     `shift_id` varchar(20)  NOT NULL ,
     `staff_id` varchar(20)  NOT NULL ,
-    PRIMARY KEY (
-        `rota_id`
-    )
+    PRIMARY KEY (`rota_id`)
 );
 
 CREATE TABLE `Staff` (
@@ -151,9 +107,7 @@ CREATE TABLE `Staff` (
     `last_name` varchar(100)  NOT NULL ,
     `position` varchar(100)  NOT NULL ,
     `hourly_rate` decimal(5,2)  NOT NULL ,
-    PRIMARY KEY (
-        `staff_id`
-    )
+    PRIMARY KEY (`staff_id`)
 );
 
 ALTER TABLE `orders` ADD CONSTRAINT `fk_orders_item_id` FOREIGN KEY(`item_id`)
@@ -179,8 +133,47 @@ REFERENCES `orders` (`created_at`);
 
 ALTER TABLE `Staff` ADD CONSTRAINT `fk_Staff_staff_id` FOREIGN KEY(`staff_id`)
 REFERENCES `rota` (`staff_id`);
+```
 
 
+---
 
+## 🧠 Entity Summary
 
+| Table        | Purpose                                 |
+|--------------|------------------------------------------|
+| `orders`     | Tracks customer orders and delivery info |
+| `customers`  | Stores customer names                    |
+| `address`    | Stores delivery addresses                |
+| `item`       | Menu items for sale                      |
+| `recipe`     | Recipe structure for each item           |
+| `inventory`  | Tracks ingredient quantities in stock    |
+| `ingredient` | Ingredient details and cost              |
+| `rota`       | Staff scheduling                         |
+| `staff`      | Staff profiles and wage info             |
 
+---
+
+## 📊 ER Diagram
+
+An [Entity Relationship Diagram (ERD)](./AEntity_Relationship_Diagram_(ERD)_for_a_database_.png) is included in this repo to visualize the relationships between tables.
+
+---
+
+## 📝 Notes
+
+- All primary and foreign key constraints are included for referential integrity.
+- Table and column names follow consistent naming conventions.
+- Designed for scalability (future support for payments, feedback, etc.)
+
+---
+
+## 🙋 Author
+
+Built by Helena Pizzeria Ops for learning, internal use, and demo purposes.
+
+---
+
+## 📃 License
+
+This project is licensed under the MIT License. Use and modify freely.
