@@ -1,4 +1,4 @@
-# 🍕 Helena Pizzeria Database Schema
+# 🍕 Helena Pizzeria Database Design
 
 This repository contains the SQL schema for Helena Pizzeria, a restaurant database designed to manage orders, inventory, customers, staff scheduling, and menu items.
 
