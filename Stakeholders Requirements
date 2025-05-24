@@ -73,3 +73,5 @@ Table	Description
        ingredient - Master list of all ingredients used.
        rota	Staff - scheduling table.
        staff	Staff member details and hourly rate.
+
+💔 Note that there are no data available to populate in the database (If you need data you make uo data and insert them into the alreday made database), the essence of this work is to showcase the authors ability to design a database from scratch using Mysql and SQL. 
