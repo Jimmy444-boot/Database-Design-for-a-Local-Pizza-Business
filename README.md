@@ -156,7 +156,7 @@ REFERENCES `rota` (`staff_id`);
 
 ## 📊 ER Diagram
 
-An [Entity Relationship Diagram (ERD)](./AEntity_Relationship_Diagram_(ERD)_for_a_database_.png) is included in this repo to visualize the relationships between tables.
+An [Entity Relationship Diagram (ERD)](file:///Users/adonisjames/Desktop/QuickDBD-Helena's%20Pizzaria.png) is included in this repo to visualize the relationships between tables.
 
 ---
 
