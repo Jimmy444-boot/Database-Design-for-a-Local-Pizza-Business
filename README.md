@@ -170,7 +170,7 @@ An [Entity Relationship Diagram (ERD)](file:///Users/adonisjames/Desktop/QuickDB
 
 ## 🙋 Author
 
-Built by Helena Pizzeria Ops for learning, internal use, and demo purposes.
+Built by James Osuji for learning, internal use, and demo purposes.
 
 ---
 
