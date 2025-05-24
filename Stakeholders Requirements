@@ -1,85 +1,75 @@
 📦 Helena Pizzeria – Stakeholder Database Requirements & Design Documentation
+
 📌 Project Overview
 This document outlines the database requirements for Helena Pizzeria, based on discussions with key stakeholders. The goal is to build a scalable and relational database system to efficiently manage orders, customers, items, ingredients, staff, and delivery processes.
 
 🧑‍💼 Stakeholder Requirements
+
 1. Order Management
-Stakeholders need real-time tracking of customer orders.
-
-Orders must include: items ordered, quantity, delivery or pickup option, and delivery address (if applicable).
-
-Ability to associate each order with a specific customer and timestamp.
+      Stakeholders need real-time tracking of customer orders.
+      Orders must include: items ordered, quantity, delivery or pickup option, and delivery address (if applicable).
+      Ability to associate each order with a specific customer and timestamp.
 
 2. Customer Information
-The business must capture customer names and associate them with orders.
-
-Support for storing repeat customer data (for loyalty or marketing purposes).
+      The business must capture customer names and associate them with orders.
+      Support for storing repeat customer data (for loyalty or marketing purposes).
 
 3. Item and Menu Management
-Items must be linked to recipes and inventory for cost tracking.
-
-Each item needs size, category, and pricing details.
-
-SKU mapping must be supported for unique menu identification.
+      Items must be linked to recipes and inventory for cost tracking.
+      Each item needs size, category, and pricing details.
+      SKU mapping must be supported for unique menu identification.
 
 4. Inventory & Ingredients
-Track each ingredient's quantity, unit price, and measurement.
-
-Ensure recipes deduct from inventory in real time.
-
-Record which ingredients are required per recipe and how much.
+      Track each ingredient's quantity, unit price, and measurement.
+      Ensure recipes deduct from inventory in real time.
+      Record which ingredients are required per recipe and how much.
 
 5. Staff and Scheduling (Rota)
-Shift scheduling is essential to ensure enough staff coverage.
-
-Staff members must be associated with specific shifts on specific dates.
-
-Hourly rates and roles must be trackable for payroll and planning.
+      Shift scheduling is essential to ensure enough staff coverage.
+      Staff members must be associated with specific shifts on specific dates.
+      Hourly rates and roles must be trackable for payroll and planning.
 
 6. Delivery Tracking
-Each order that requires delivery must include a valid delivery address.
+      Each order that requires delivery must include a valid delivery address.
+      Multiple address fields allow flexibility (apartment numbers, etc.)
+      Integration with delivery ZIP codes and cities for logistics planning.
 
-Multiple address fields allow flexibility (apartment numbers, etc.)
-
-Integration with delivery ZIP codes and cities for logistics planning.
 
 🧠 Thought Process Behind Database Design
-This database design follows relational database best practices, ensuring data integrity, normalization, and referential integrity. Here's a breakdown of the design considerations:
+      This database design follows relational database best practices, ensuring data integrity, normalization, and referential integrity. Here's a breakdown of the design considerations:
+
 
 ✅ Normalization
-The database follows 3rd Normal Form (3NF) principles:
+      The database follows 3rd Normal Form (3NF) principles:
+      Reduces redundancy (e.g., addresses stored separately, linked by address_id).
+      Uses foreign keys to maintain clear relationships between tables.
+      Allows modular expansion (e.g., if we want to add delivery fees or discounts later).
 
-Reduces redundancy (e.g., addresses stored separately, linked by address_id).
-
-Uses foreign keys to maintain clear relationships between tables.
-
-Allows modular expansion (e.g., if we want to add delivery fees or discounts later).
 
 🔗 Foreign Key Usage
-Every order references the correct item, customer, and address.
+      Every order references the correct item, customer, and address.
+      recipe acts as a junction table between item and ingredient, allowing many-to-many relationships.
+      rota tracks staff scheduling, linked to both staff and orders.
 
-recipe acts as a junction table between item and ingredient, allowing many-to-many relationships.
-
-rota tracks staff scheduling, linked to both staff and orders.
 
 ⛓️ Data Integrity
-Data types have been chosen carefully (e.g., boolean for delivery, decimal for prices).
+      Data types have been chosen carefully (e.g., boolean for delivery, decimal for prices).
+      Primary and foreign keys enforce consistency and prevent orphan records.
 
-Primary and foreign keys enforce consistency and prevent orphan records.
 
 🔄 Scalability
-Easily extendable with additional features like payment tracking, delivery status, or loyalty rewards.
+      Easily extendable with additional features like payment tracking, delivery status, or loyalty rewards.
+      Structured to support business intelligence and reporting needs.
 
-Structured to support business intelligence and reporting needs.
 
 🗃️ Entity Relationship Summary
 Table	Description
-orders	Links customer, item, and delivery info for every order.
-customers	Stores customer details.
-address	Stores delivery addresses linked to orders.
-item	Menu items offered by Helena Pizzeria.
-recipe	Links items to ingredients and required quantities.
-inventory	Tracks ingredient availability.
-ingredient	Master list of all ingredients used.
-rota	Staff scheduling table.
-staff	Staff member details and hourly rate.
+       orders -	Links customer, item, and delivery info for every order.
+       customers - Stores customer details.
+       address - Stores delivery addresses linked to orders.
+       item - Menu items offered by Helena Pizzeria.
+       recipe	- Links items to ingredients and required quantities.
+       inventory - Tracks ingredient availability.
+       ingredient - Master list of all ingredients used.
+       rota	Staff - scheduling table.
+       staff	Staff member details and hourly rate.
